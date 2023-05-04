@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #555555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thank You for Contacting Us!</h1>
+        <form action="{{ url_for('index') }}" method="GET">
+            <button type="submit">Home</button>
+        </form>
+        <form action="{{ url_for('data') }}" method="GET">
+            <button type="submit">Past Enquiry</button>
+        </form>
+    </div>
+    <br>
+    
+</body>
+</html>

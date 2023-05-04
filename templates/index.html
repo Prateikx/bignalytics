@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bignalytics Enquiry</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      form {
+        width: 50%;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+      }
+
+      h1 {
+        text-align: center;
+        color: #333333;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #333333;
+      }
+
+      select, input[type=number] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+      }
+
+      select:focus, input[type=number]:focus {
+        outline: none;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+      }
+
+      input[type=submit] {
+        background-color: #333333;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type=submit]:hover {
+        background-color: #555555;
+      }
+    </style>
+  </head>
+  
+<body>
+    <h1>Bignalytics Enquiry Form</h1>
+    <form action="submit" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br><br>
+  
+      <label for="age">Age:</label>
+      <input type="text" id="age" name="age" required><br><br>
+  
+      <label for="mobile">Mobile Number:</label>
+      <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required><br><br>
+  
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required><br><br>
+  
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" required><br><br>
+
+      <label for="city">Education:</label>
+      <input type="text" id="Education" name="Education" required><br><br>
+
+      <label for="city">Course:</label>
+      <select name="Course" id="Course">
+        <option value="Python">Python Programming</option>
+        <option value="DATA Science-AI/ML">DATA Science - AI/ML</option>
+        <option value="DATA Analytics">DATA Analytics</option>
+        <option value="Cyber security">Cyber security</option>
+        <option value="Ethical hacking">Ethical hacking</option>
+      </select>
+
+      <label for="city">Refferal:</label>
+      <input type="text" id="Refferal" name="Refferal" value="New"><br><br>
+
+      <label for="city">Available to join in (in days) :</label>
+      <input type="text" id="available" name="Availability" min="0" max="90" value="0"><br><br>
+
+
+      
+  
+      <input type="submit" value="Submit">
+    </form>
+    <br>
+    <footer>
+    <p>Address: 406, Bansiwala Tower, Above Morni Saari Agrasen Square, Sapna Sangeeta Rd, Indore, Madhya Pradesh 452014<br>
+    <a href="mailto:Datascience@bignalytics.com">contact@bignalytics.com</a></p>
+    </footer>
+</body>
+</html>
