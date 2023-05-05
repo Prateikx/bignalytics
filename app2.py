@@ -12,7 +12,6 @@ config = {
     'database': 'airbnb'
 }
 
-
 @app.route('/')
 def index():
     conn = mariadb.connect(**config)
@@ -21,17 +20,17 @@ def index():
         cur = conn.cursor()
         sql = """CREATE TABLE bigdata (
             ID INT AUTO_INCREMENT,
-            name VARCHAR(25),
-            Age VARCHAR(25),
-            Mobile VARCHAR(10),
+            name VARCHAR(50),
+            # Age VARCHAR(25),
+            # Mobile VARCHAR(10),
             Email VARCHAR(25),
             Password VARCHAR(16),
-            City VARCHAR(20),
-            Education VARCHAR(25),
-            Course VARCHAR(25),
-            Refferal VARCHAR(25),
-            comments VARCHAR(200),
-            Availability VARCHAR(25),
+            # City VARCHAR(20),
+            # Education VARCHAR(25),
+            # Course VARCHAR(25),
+            # Refferal VARCHAR(25),
+            # comments VARCHAR(200),
+            # Availability VARCHAR(25),
             PRIMARY KEY (ID)
         );"""
         # print('Table Created Successfully')
@@ -46,11 +45,37 @@ def index():
 @app.route('/dashboard', methods=["POST"])
 def dashboard():
     conn = mariadb.connect(**config)
-    # try:
-    #     cur = conn.cursor()
-    #     sql = 9
+    try:
+        cur = conn.cursor()
+        check = {
+            'email' : request.form["email"],
+            'password' : request.form["password"]
+        }
 
-    return "dashboard"
+        sql = f"SELECT * FROM bigdata WHERE email = %s AND password = %s ;"
+        cur.execute(sql, (check.get('email'),check.get('password')))
+        result = cur.fetchone()
+        
+        if result:
+            # Email and password exists together in the database
+            conn.commit()
+            cur.close()
+            conn.close()
+            return "Welcome to Your Dashboard"
+        else:
+            sql = f"SELECT * FROM bigdata WHERE email = %s"
+            cur.execute(sql, (check.get('email'),))
+            result = cur.fetchone()
+            if result:
+                return render_template("login.html", pop="Please check Your Password")
+            else:
+                return render_template("login.html", pop="User does not exist in our database, Please Signup!")
+
+
+            
+    except mariadb.Error as e:
+        print(f"Error: {e}")
+        return "An error occurred"
 
 
 @app.route('/signup')
@@ -62,6 +87,7 @@ def signup():
 def new_data():
     conn = mariadb.connect(**config)
     data = {
+        "name" : request.form["name"],
         "Email": request.form["email"],
         "Password": request.form["password11"]
     }
@@ -69,7 +95,7 @@ def new_data():
     try:
         if request.form["password11"] == request.form["password12"]:
             cur = conn.cursor()
-            sql = "INSERT INTO bigdata (Email, password) VALUES (?, ?)"
+            sql = "INSERT INTO bigdata (name, Email, password) VALUES (%s, %s, %s)"
             cur.execute(sql, vals)
             conn.commit()
 
@@ -78,7 +104,7 @@ def new_data():
 
             return render_template('Thankyou.html')
         else:
-            return render_template('Signup.html', pop="Both the password should be same!")
+            return render_template('Signup.html', pop="Both the passwords should match!")
     except mariadb.Error as e:
         return jsonify(error=str(e)), 500
 
@@ -101,7 +127,8 @@ def Submit():
         try:
             conn = mariadb.connect(**config)
             cur = conn.cursor()
-            sql = "INSERT INTO mytable (name, age, mobile, Email, City, Education, Course, Refferal, Availability) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            sql = """INSERT INTO mytable (name, age, mobile, Email, City, Education, Course,
+                        Refferal, Availability) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
             vals = tuple(data.values())
             cur.execute(sql, vals)
             conn.commit()
