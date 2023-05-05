@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import mariadb
+from MySQL import *
 
 app = Flask(__name__)
 
@@ -8,8 +9,8 @@ config = {
     'host': 'localhost',
     'port': 3306,
     'user': 'root',
-    'password': 'admin',
-    'database': 'airbnb'
+    'password': password,
+    'database': database
 }
 
 @app.route('/')
@@ -44,7 +45,7 @@ def dashboard():
             'password' : request.form["password"]
         }
 
-        sql = f"SELECT * FROM bigdata WHERE email = %s AND password = %s ;"
+        sql = f"SELECT * FROM bigdata WHERE email = %s AND password = %s;"
         cur.execute(sql, (check.get('email'),check.get('password')))
         result = cur.fetchone()
         
@@ -62,9 +63,7 @@ def dashboard():
                 return render_template("login.html", pop="Please check Your Password")
             else:
                 return render_template("login.html", pop="User does not exist in our database, Please Signup!")
-
-
-            
+               
     except mariadb.Error as e:
         print(f"Error: {e}")
         return "An error occurred"
