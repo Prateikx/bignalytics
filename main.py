@@ -21,16 +21,8 @@ def index():
         sql = """CREATE TABLE bigdata (
             ID INT AUTO_INCREMENT,
             name VARCHAR(50),
-            # Age VARCHAR(25),
-            # Mobile VARCHAR(10),
             Email VARCHAR(25),
             Password VARCHAR(16),
-            # City VARCHAR(20),
-            # Education VARCHAR(25),
-            # Course VARCHAR(25),
-            # Refferal VARCHAR(25),
-            # comments VARCHAR(200),
-            # Availability VARCHAR(25),
             PRIMARY KEY (ID)
         );"""
         # print('Table Created Successfully')
